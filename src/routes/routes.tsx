@@ -4,6 +4,8 @@ import Contact from "../pages/Contact";
 import App from "../App";
 import { generateRoutes } from "../utils/generateRoutes";
 import adminItems from "./admin.routes";
+import facultyItems from "./faculty.routes";
+import studentItems from "./student.routes";
 
 const router = createBrowserRouter([
     {
@@ -25,6 +27,20 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <App />,
         children: generateRoutes(adminItems),
+    },
+
+    //* faculty routes
+    {
+        path: "/faculty",
+        element: <App />,
+        children: generateRoutes(facultyItems),
+    },
+
+    //* student routes
+    {
+        path: "/student",
+        element: <App />,
+        children: generateRoutes(studentItems),
     },
 ]);
 

@@ -4,6 +4,7 @@ import { generateSidebarItems } from "../../utils/generateSidebarItems";
 import adminItems from "../../routes/admin.routes";
 import facultyItems from "../../routes/faculty.routes";
 import studentItems from "../../routes/student.routes";
+import { useAppSelector } from "../../redux/hook";
 
 const userRole = {
     ADMIN: "admin",
@@ -12,7 +13,8 @@ const userRole = {
 };
 
 const Sidebar = () => {
-    const role = "admin";
+    const { role: user } = useAppSelector((state) => state.auth.user)!;
+    const role = user;
     let sidebarItems;
 
     switch (role) {

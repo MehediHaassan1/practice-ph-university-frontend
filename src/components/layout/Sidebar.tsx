@@ -13,11 +13,10 @@ const userRole = {
 };
 
 const Sidebar = () => {
-    const { role: user } = useAppSelector((state) => state.auth.user)!;
-    const role = user;
+    const { user } = useAppSelector((state) => state.auth);
     let sidebarItems;
 
-    switch (role) {
+    switch (user!.role) {
         case userRole.ADMIN:
             sidebarItems = generateSidebarItems(adminItems, userRole.ADMIN);
             break;

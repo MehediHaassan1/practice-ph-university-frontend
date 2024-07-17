@@ -8,7 +8,7 @@ const academicManagementApi = baseApi.injectEndpoints(
                 query: (args) => {
                     const params = new URLSearchParams();
                     if (args) {
-                        args.forEach((item:TQueryParams) => {
+                        args.forEach((item: TQueryParams) => {
                             params.append(item.name, item.value as string)
                         })
                     }
@@ -32,6 +32,40 @@ const academicManagementApi = baseApi.injectEndpoints(
                         url: '/academic-semesters/create-academic-semester',
                         method: 'POST',
                         body: data,
+                    }
+                }
+            }),
+            createFaculty: builder.mutation({
+                query: (data) => {
+                    return {
+                        url: '/academic-faculties/create-academic-faculty',
+                        method: 'POST',
+                        body: data,
+                    }
+                }
+            }),
+            getAllFaculty: builder.query({
+                query: () => {
+                    return {
+                        url: '/academic-faculties',
+                        method: 'GET',
+                    }
+                }
+            }),
+            createDepartment: builder.mutation({
+                query: (data) => {
+                    return {
+                        url: '/academic-departments/create-academic-department',
+                        method: 'POST',
+                        body: data,
+                    }
+                }
+            }),
+            getAllDepartment: builder.query({
+                query: () => {
+                    return {
+                        url: '/academic-departments',
+                        method: 'GET',
                     }
                 }
             }),

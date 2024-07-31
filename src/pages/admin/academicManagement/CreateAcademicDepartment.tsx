@@ -34,7 +34,6 @@ const CreateAcademicDepartment = () => {
         } else {
             toast.error(res?.error?.data?.message, {id: toastId});
         }
-        console.log(res);
     };
 
     return (

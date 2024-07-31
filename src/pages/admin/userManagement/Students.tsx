@@ -1,35 +1,33 @@
 import { Table, TableColumnsType, TableProps } from "antd";
-import academicManagementApi from "../../../redux/features/admin/academicManagement.api";
 import { TAcademicSemester, TQueryParams } from "../../../types/global.types";
 import { useState } from "react";
-import { toast } from "sonner";
+import userManagementApi from "../../../redux/features/admin/userManagement.api";
 
 export type TTableData = Pick<
     TAcademicSemester,
     "name" | "year" | "startMonth" | "endMonth"
 >;
 
-const AcademicSemester = () => {
+const Students = () => {
     const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
-    const { data: semesterData } =
-        academicManagementApi.useGetAllAcademicSemesterQuery(params);
 
-    const tableData = semesterData?.data?.map(
-        ({ _id, name, year, startMonth, endMonth }) => {
-            return {
-                key: _id,
-                name,
-                year,
-                startMonth,
-                endMonth,
-            };
-        }
-    );
+    const { data: studentData, isLoading: studentLoading } =
+        userManagementApi.useGetAllStudentQuery(undefined);
+
+    if (studentLoading) return <div> Loading ...</div>;
+
+    const tableData = studentData?.data?.map(({ _id, fullName, id }) => {
+        return {
+            key: _id,
+            fullName,
+            id,
+        };
+    });
 
     const columns: TableColumnsType<TTableData> = [
         {
-            title: "Name",
-            dataIndex: "name",
+            title: "Full Name",
+            dataIndex: "fullName",
             showSorterTooltip: { target: "full-header" },
             filters: [
                 {
@@ -47,8 +45,8 @@ const AcademicSemester = () => {
             ],
         },
         {
-            title: "Year",
-            dataIndex: "year",
+            title: "ID",
+            dataIndex: "id",
             filters: [
                 {
                     text: "2024",
@@ -72,14 +70,14 @@ const AcademicSemester = () => {
                 },
             ],
         },
-        {
-            title: "Start Month",
-            dataIndex: "startMonth",
-        },
-        {
-            title: "End Month",
-            dataIndex: "endMonth",
-        },
+        // {
+        //     title: "Academic Semester",
+        //     dataIndex: "academicSemester.name",
+        // },
+        // {
+        //     title: "Academic Department",
+        //     dataIndex: "academicDepartment",
+        // },
     ];
 
     const onChange: TableProps<TTableData>["onChange"] = (
@@ -110,4 +108,4 @@ const AcademicSemester = () => {
     );
 };
 
-export default AcademicSemester;
+export default Students;

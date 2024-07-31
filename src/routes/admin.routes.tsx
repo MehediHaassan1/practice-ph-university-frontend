@@ -8,6 +8,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin";
 import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
 import CreateStudent from "../pages/admin/userManagement/CreateStudent";
+import Students from "../pages/admin/userManagement/Students";
 
 const adminItems = [
     {
@@ -54,9 +55,14 @@ const adminItems = [
         name: "User Management",
         children: [
             {
-                name: "Create Admin",
-                path: "create-admin",
-                element: <CreateAdmin />,
+                name: "Create Student",
+                path: "create-student",
+                element: <CreateStudent />,
+            },
+            {
+                name: "Students",
+                path: "students",
+                element: <Students />,
             },
             {
                 name: "Create Faculty",
@@ -64,9 +70,9 @@ const adminItems = [
                 element: <CreateFaculty />,
             },
             {
-                name: "Create Student",
-                path: "create-student",
-                element: <CreateStudent />,
+                name: "Create Admin",
+                path: "create-admin",
+                element: <CreateAdmin />,
             },
         ],
     },

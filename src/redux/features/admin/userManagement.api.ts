@@ -11,6 +11,14 @@ const userManagementApi = baseApi.injectEndpoints({
                 }
             }
         }),
+        getAllStudent: builder.query({
+            query: () => {
+                return {
+                    url: '/students',
+                    method: 'GET',
+                }
+            }
+        })
     }),
 })
 

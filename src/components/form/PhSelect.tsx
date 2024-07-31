@@ -9,6 +9,7 @@ type TPHSelectProps = {
         label: string;
         disabled?: boolean;
     }[];
+    disabled?: boolean;
 };
 
 const PhSelect = ({ name, label, options }: TPHSelectProps) => {

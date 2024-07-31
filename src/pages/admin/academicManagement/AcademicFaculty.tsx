@@ -17,10 +17,10 @@ const columns: TableProps<DataType>["columns"] = [
 const AcademicFaculty = () => {
     const { data, isLoading } =
         academicManagementApi.useGetAllFacultyQuery(undefined);
-
     if (isLoading) {
         return <div>Loading ...</div>;
     }
+    
 
     const tableData: DataType[] = data?.data?.map(
         (item: { _id: string; name: string }) => ({

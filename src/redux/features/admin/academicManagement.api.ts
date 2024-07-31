@@ -25,6 +25,7 @@ const academicManagementApi = baseApi.injectEndpoints(
                     }
                     return data;
                 },
+                providesTags: ['academicManagement']
             }),
             createAcademicSemester: builder.mutation({
                 query: (data) => {
@@ -33,7 +34,8 @@ const academicManagementApi = baseApi.injectEndpoints(
                         method: 'POST',
                         body: data,
                     }
-                }
+                },
+                invalidatesTags: ['academicManagement']
             }),
             createFaculty: builder.mutation({
                 query: (data) => {
@@ -42,7 +44,8 @@ const academicManagementApi = baseApi.injectEndpoints(
                         method: 'POST',
                         body: data,
                     }
-                }
+                },
+                invalidatesTags: ['academicManagement']
             }),
             getAllFaculty: builder.query({
                 query: () => {
@@ -50,7 +53,8 @@ const academicManagementApi = baseApi.injectEndpoints(
                         url: '/academic-faculties',
                         method: 'GET',
                     }
-                }
+                },
+                providesTags: ['academicManagement']
             }),
             createDepartment: builder.mutation({
                 query: (data) => {
@@ -59,7 +63,8 @@ const academicManagementApi = baseApi.injectEndpoints(
                         method: 'POST',
                         body: data,
                     }
-                }
+                },
+                invalidatesTags: ['academicManagement']
             }),
             getAllDepartment: builder.query({
                 query: () => {
@@ -67,7 +72,8 @@ const academicManagementApi = baseApi.injectEndpoints(
                         url: '/academic-departments',
                         method: 'GET',
                     }
-                }
+                },
+                providesTags: ['academicManagement']
             }),
         }),
     }

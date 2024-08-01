@@ -18,6 +18,15 @@ const userManagementApi = baseApi.injectEndpoints({
                     method: 'GET',
                 }
             }
+        }),
+        getSingleStudent: builder.query({
+            query: (id) => {
+                console.log(id);
+                return {
+                    url: `/students/${id}`,
+                    method: 'GET'
+                }
+            }
         })
     }),
 })

@@ -2,7 +2,6 @@ import { Table, TableColumnsType, TableProps } from "antd";
 import academicManagementApi from "../../../redux/features/admin/academicManagement.api";
 import { TAcademicSemester, TQueryParams } from "../../../types/global.types";
 import { useState } from "react";
-import { toast } from "sonner";
 
 export type TTableData = Pick<
     TAcademicSemester,
@@ -11,8 +10,10 @@ export type TTableData = Pick<
 
 const AcademicSemester = () => {
     const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
-    const { data: semesterData } =
+    const { data: semesterData, isLoading } =
         academicManagementApi.useGetAllAcademicSemesterQuery(params);
+
+    if (isLoading) return <div>Loading...</div>;
 
     const tableData = semesterData?.data?.map(
         ({ _id, name, year, startMonth, endMonth }) => {

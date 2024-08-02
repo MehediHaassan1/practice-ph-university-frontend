@@ -10,6 +10,7 @@ import CreateFaculty from "../pages/admin/userManagement/CreateFaculty";
 import CreateStudent from "../pages/admin/userManagement/CreateStudent";
 import Students from "../pages/admin/userManagement/Students";
 import StudentDetails from "../pages/admin/userManagement/StudentDetails";
+import Faculty from "../pages/admin/userManagement/Faculty";
 
 const adminItems = [
     {
@@ -73,6 +74,11 @@ const adminItems = [
                 name: "Create Faculty",
                 path: "create-faculty",
                 element: <CreateFaculty />,
+            },
+            {
+                name: "Faculties",
+                path: "faculties",
+                element: <Faculty />,
             },
             {
                 name: "Create Admin",

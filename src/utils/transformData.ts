@@ -19,19 +19,21 @@ export const transformData = (data: Record<string, any>) => {
     const fullName = `${nameFields?.firstName} ${nameFields?.middleName} ${nameFields?.lastName}`;
 
     const transformed = keysToInclude.map((key) => {
-        if (key === 'name') return null;
+        // if (key === 'name') return null;
         return {
             key: key,
             label: transformLabel(key),
             value: data[key].toString()
         }
-    }).filter(item => item !== null);
+    })
 
-    transformed.push({
-        key: (transformed.length + 1).toString(),
-        label: "Full Name",
-        value: fullName
-    });
+    if (nameFields?.firstName) {
+        transformed.push({
+            key: (transformed.length + 1).toString(),
+            label: "Full Name",
+            value: fullName
+        });
+    }
 
     return transformed;
 };

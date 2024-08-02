@@ -37,7 +37,7 @@ const academicManagementApi = baseApi.injectEndpoints(
                 },
                 invalidatesTags: ['academicManagement']
             }),
-            createFaculty: builder.mutation({
+            createAcademicFaculty: builder.mutation({
                 query: (data) => {
                     return {
                         url: '/academic-faculties/create-academic-faculty',

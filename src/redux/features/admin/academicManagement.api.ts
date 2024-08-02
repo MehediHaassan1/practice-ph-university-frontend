@@ -47,7 +47,7 @@ const academicManagementApi = baseApi.injectEndpoints(
                 },
                 invalidatesTags: ['academicManagement']
             }),
-            getAllFaculty: builder.query({
+            getAllAcademicFaculty: builder.query({
                 query: () => {
                     return {
                         url: '/academic-faculties',

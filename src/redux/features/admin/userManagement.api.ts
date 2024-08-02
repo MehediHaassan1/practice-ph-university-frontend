@@ -9,7 +9,8 @@ const userManagementApi = baseApi.injectEndpoints({
                     method: 'POST',
                     body: data,
                 }
-            }
+            },
+            invalidatesTags: ['userManagement']
         }),
         getAllStudent: builder.query({
             query: () => {
@@ -17,7 +18,8 @@ const userManagementApi = baseApi.injectEndpoints({
                     url: '/students',
                     method: 'GET',
                 }
-            }
+            },
+            providesTags: ['userManagement']
         }),
         getSingleStudent: builder.query({
             query: (id) => {
@@ -25,16 +27,36 @@ const userManagementApi = baseApi.injectEndpoints({
                     url: `/students/${id}`,
                     method: 'GET'
                 }
-            }
+            },
+            providesTags: ['userManagement']
+        }),
+        blockUser: builder.mutation({
+            query: (payload) => {
+                return {
+                    url: `/users/change-status/${payload.id}`,
+                    method: 'POST',
+                    body: payload.data
+                }
+            },
+            invalidatesTags: ['userManagement']
         }),
         createFaculty: builder.mutation({
-            query: (data) =>{
+            query: (data) => {
                 return {
                     url: `/users/create-faculty`,
                     method: 'POST',
                     body: data,
                 }
             }
+        }),
+        getAllFaculty: builder.query({
+            query: () => {
+                return {
+                    url: '/faculties',
+                    method: 'GET'
+                }
+            },
+            providesTags: ['userManagement']
         })
     }),
 })

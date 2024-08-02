@@ -16,7 +16,7 @@ const columns: TableProps<DataType>["columns"] = [
 
 const AcademicFaculty = () => {
     const { data, isLoading } =
-        academicManagementApi.useGetAllFacultyQuery(undefined);
+        academicManagementApi.useGetAllAcademicFacultyQuery(undefined);
     if (isLoading) {
         return <div>Loading ...</div>;
     }

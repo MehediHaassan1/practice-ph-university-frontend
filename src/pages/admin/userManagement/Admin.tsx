@@ -3,13 +3,12 @@ import userManagementApi from "../../../redux/features/admin/userManagement.api"
 import { Button, Table } from "antd";
 import { toast } from "sonner";
 
-const Faculty = () => {
-    const { data: facultyData, isLoading } =
-        userManagementApi.useGetAllFacultyQuery(undefined);
-    const [blockUser] = userManagementApi.useBlockUserMutation();
+const Admin = () => {
+    const { data:adminData, isLoading } =
+        userManagementApi.useGetAllAdminQuery(undefined);
+        const [blockUser] = userManagementApi.useBlockUserMutation();
 
-    if (isLoading) return <div>Loading...</div>;
-
+    if (isLoading) return <div>Loading ... </div>;
 
     // -------------- Actions start --------------- //
     const handleUpdate = (facultyId: string) => {
@@ -48,7 +47,7 @@ const Faculty = () => {
 
     // -------------- Actions end --------------- //
 
-    const tableData = facultyData?.data?.map(
+    const tableData = adminData?.data?.map(
         ({
             _id,
             fullName,
@@ -72,13 +71,13 @@ const Faculty = () => {
 
     const columns = [
         {
-            key: "facultyName",
-            title: "Faculty Name",
+            key: "adminName",
+            title: "Admin Name",
             dataIndex: "fullName",
         },
         {
-            key: "facultyID",
-            title: "Faculty ID",
+            key: "adminID",
+            title: "Admin ID",
             dataIndex: "id",
         },
         {
@@ -94,7 +93,7 @@ const Faculty = () => {
                 return (
                     <div>
                         <Link
-                            to={`/admin/faculty/details/${record.key}`}
+                            to={`/admin/admin/details/${record.key}`}
                             style={{ marginRight: "20px" }}
                         >
                             Details
@@ -135,4 +134,4 @@ const Faculty = () => {
     );
 };
 
-export default Faculty;
+export default Admin;

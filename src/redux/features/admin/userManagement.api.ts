@@ -3,11 +3,11 @@ import { baseApi } from "../../api/baseApi";
 const userManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         createStudent: builder.mutation({
-            query: (data) => {
+            query: (payload) => {
                 return {
                     url: '/users/create-student',
                     method: 'POST',
-                    body: data,
+                    body: payload,
                 }
             },
             invalidatesTags: ['userManagement']
@@ -41,11 +41,11 @@ const userManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['userManagement']
         }),
         createFaculty: builder.mutation({
-            query: (data) => {
+            query: (payload) => {
                 return {
                     url: `/users/create-faculty`,
                     method: 'POST',
-                    body: data,
+                    body: payload,
                 }
             }
         }),
@@ -64,7 +64,36 @@ const userManagementApi = baseApi.injectEndpoints({
                     url: `/faculties/${id}`,
                     method: 'GET'
                 }
-            }
+            },
+            providesTags: ['userManagement']
+        }),
+        createAdmin: builder.mutation({
+            query: (payload) => {
+                return {
+                    url: `/users/create-admin`,
+                    method: 'POST',
+                    body: payload
+                }
+            },
+            invalidatesTags: ['userManagement']
+        }),
+        getAllAdmin: builder.query({
+            query: () => {
+                return {
+                    url: '/admins',
+                    method: 'GET',
+                }
+            },
+            providesTags: ['userManagement']
+        }),
+        getSingleAdmin: builder.query({
+            query: (id) => {
+                return {
+                    url: `/admins/${id}`,
+                    method: 'GET'
+                }
+            },
+            providesTags: ['userManagement']
         })
     }),
 })

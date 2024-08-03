@@ -5,29 +5,17 @@ import { Avatar, Card, Table, Tabs, TabsProps } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { CSSProperties } from "react";
 
-const FacultyDetails = () => {
-    const { id } = useParams();
-    const { data, isLoading } = userManagementApi.useGetSingleFacultyQuery(id);
-    if (isLoading) return <div>Loading...</div>;
+const AdminDetails = () => {
+    const {id} = useParams()
+    const {data, isLoading} = userManagementApi.useGetSingleAdminQuery(id)
+    if(isLoading) return <div>Loading ...</div>
 
     const generalInformationData = transformData(data?.data);
-    const academicFacultyData = transformData(data?.data?.academicFaculty);
-    const academicDepartmentData = transformData(
-        data?.data?.academicDepartment
-    );
 
     const tabData = [
         {
             label: "General Information",
             data: generalInformationData,
-        },
-        {
-            label: "Academic Faculty",
-            data: academicFacultyData,
-        },
-        {
-            label: "Academic Department",
-            data: academicDepartmentData,
         },
     ];
 
@@ -114,7 +102,7 @@ const FacultyDetails = () => {
                     >
                         <div style={styles.cardBody}>
                             <p style={styles.info}>
-                                <strong>Faculty ID:</strong> {data?.data?.id}
+                                <strong>Admin ID:</strong> {data?.data?.id}
                             </p>
                         </div>
                     </Card>
@@ -127,7 +115,8 @@ const FacultyDetails = () => {
     );
 };
 
-export default FacultyDetails;
+export default AdminDetails;
+
 
 const styles: { [key: string]: CSSProperties } = {
     container: {

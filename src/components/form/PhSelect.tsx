@@ -1,36 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Select } from "antd";
 import { Controller } from "react-hook-form";
 
-type TPHSelectProps = {
+type PhSelectProps = {
+    control?: any;
     name: string;
-    label: string;
-    options: {
-        value: string;
-        label: string;
-        disabled?: boolean;
-    }[];
+    options: Array<{ value: string; label: string }>;
+    label?: string;
     disabled?: boolean;
 };
 
-const PhSelect = ({ name, label, options }: TPHSelectProps) => {
-    return (
-        <Controller
-            name={name}
-            render={({ field, fieldState: { error } }) => (
-                <Form.Item label={label}>
-                    <Select
-                        style={{ width: "100%" }}
-                        {...field}
-                        options={options}
-                        size="large"
-                    />
-                    {error && (
-                        <small style={{ color: "red" }}>{error.message}</small>
-                    )}
-                </Form.Item>
-            )}
-        />
-    );
-};
+const PhSelect = ({ control, name, options, label, disabled }: PhSelectProps) => (
+    <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange, onBlur, value, ref, name } }) => (
+            <Form.Item label={label}>
+                <Select
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    value={value}
+                    ref={ref}
+                    name={name}
+                    disabled={disabled}
+                >
+                    {options.map((option) => (
+                        <Select.Option key={option.value} value={option.value}>
+                            {option.label}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </Form.Item>
+        )}
+    />
+);
 
 export default PhSelect;

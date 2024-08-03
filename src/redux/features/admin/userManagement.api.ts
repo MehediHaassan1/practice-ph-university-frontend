@@ -30,6 +30,16 @@ const userManagementApi = baseApi.injectEndpoints({
             },
             providesTags: ['userManagement']
         }),
+        updateStudent: builder.mutation({
+            query: ({ id, studentInfo }) => {
+                console.log(studentInfo.student)
+                return {
+                    url: `/students/${id}`,
+                    method: 'PATCH',
+                    body: {student: studentInfo.student},
+                }
+            }
+        }),
         blockUser: builder.mutation({
             query: (payload) => {
                 return {

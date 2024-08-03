@@ -34,7 +34,6 @@ const PHForm = ({ onSubmit, children, resolver }: TFormProps) => {
             <Form layout="vertical" onFinish={methods.handleSubmit(submit)}>
                 {children}
             </Form>
-            ;
         </FormProvider>
     );
 };

@@ -108,7 +108,9 @@ const Students = () => {
                             onClick={() => handleUpdate(record.id)}
                             style={{ marginRight: "20px" }}
                         >
-                            Update
+                            <Link to={`/admin/student/update/${record.key}`}>
+                                Update
+                            </Link>
                         </Button>
                         {record?.status === "in-progress" ? (
                             <Button

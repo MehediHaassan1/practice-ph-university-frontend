@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Input } from "antd";
-import { Controller } from "react-hook-form";
+import { Control, Controller } from "react-hook-form";
 
 type TInputProps = {
+    control?: Control<any>;
     type: string;
     name: string;
     label?: string;
 };
 
-const PHInput = ({ type, name, label }: TInputProps) => {
+const PHInput = ({ control, type, name, label }: TInputProps) => {
     return (
         <div style={{ marginBottom: "20px" }}>
             <Controller
+                control={control}
                 name={name}
                 render={({ field, fieldState: { error } }) => (
                     <Form.Item label={label}>

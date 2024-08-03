@@ -36,8 +36,19 @@ const Students = () => {
         }
     };
 
-    const handleUnblock = (studentId: string) => {
-        console.log("Clicked on Unblock", studentId);
+    const handleUnblock = async (studentId: string) => {
+        const info = {
+            id: studentId,
+            data: { status: "in-progress" },
+        };
+        try {
+            const res = await blockUser(info);
+            if (res.data) {
+                toast.success(res?.data?.message);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // -------------- Actions end --------------- //
@@ -47,19 +58,19 @@ const Students = () => {
             _id,
             fullName,
             id,
-            user: { status, _id:userId },
+            user: { status, _id: userId },
         }: {
             _id: string;
             fullName: string;
             id: string;
-            user: { status: string; _id: string; };
+            user: { status: string; _id: string };
         }) => {
             return {
                 key: _id,
                 fullName,
                 id,
                 status,
-                userId
+                userId,
             };
         }
     );
@@ -108,7 +119,7 @@ const Students = () => {
                             </Button>
                         ) : (
                             <Button
-                                onClick={() => handleUnblock(record.key)}
+                                onClick={() => handleUnblock(record.userId)}
                                 style={{ marginRight: "20px" }}
                             >
                                 unblock

@@ -57,6 +57,14 @@ const userManagementApi = baseApi.injectEndpoints({
                 }
             },
             providesTags: ['userManagement']
+        }),
+        getSingleFaculty: builder.query({
+            query: (id) => {
+                return {
+                    url: `/faculties/${id}`,
+                    method: 'GET'
+                }
+            }
         })
     }),
 })

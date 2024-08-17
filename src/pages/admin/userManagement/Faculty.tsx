@@ -1,15 +1,21 @@
 import { Link } from "react-router-dom";
 import userManagementApi from "../../../redux/features/admin/userManagement.api";
-import { Button, Table } from "antd";
+import { Button, Pagination, Table } from "antd";
 import { toast } from "sonner";
+import { useState } from "react";
 
 const Faculty = () => {
+    const [page, setPage] = useState(1);
     const { data: facultyData, isLoading } =
-        userManagementApi.useGetAllFacultyQuery(undefined);
+        userManagementApi.useGetAllFacultyQuery([
+            { name: "limit", value: 3 },
+            { name: "page", value: page },
+            { name: "sort", value: "id" },
+        ]);
     const [blockUser] = userManagementApi.useBlockUserMutation();
 
     if (isLoading) return <div>Loading...</div>;
-
+    const metaData = facultyData?.meta;
 
     // -------------- Actions start --------------- //
     const handleUpdate = (facultyId: string) => {
@@ -127,11 +133,20 @@ const Faculty = () => {
     ];
 
     return (
-        <Table
-            columns={columns}
-            dataSource={tableData}
-            showSorterTooltip={{ target: "sorter-icon" }}
-        />
+        <>
+            <Table
+                columns={columns}
+                dataSource={tableData}
+                showSorterTooltip={{ target: "sorter-icon" }}
+                pagination={false}
+            />
+            <Pagination
+                total={metaData?.total}
+                pageSize={metaData?.limit}
+                current={page}
+                onChange={(value) => setPage(value)}
+            />
+        </>
     );
 };
 

@@ -1,15 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Col, Row, Table, TableProps } from "antd";
+import { Button, Col, Pagination, Row, Table, TableProps } from "antd";
 import academicManagementApi from "../../../redux/features/admin/academicManagement.api";
+import { useState } from "react";
 
 const AcademicDepartment = () => {
-    const { data, isLoading } =
-        academicManagementApi.useGetAllDepartmentQuery(undefined);
+    const [page, setPage] = useState(1);
+    const { data, isLoading } = academicManagementApi.useGetAllDepartmentQuery([
+        { name: "limit", value: 3 },
+        { name: "page", value: page },
+        { name: "sort", value: "-createdAt" },
+    ]);
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
-    console.log(data?.data);
+    const metaData = data?.meta;
 
     interface DataType {
         key: string;
@@ -28,6 +33,15 @@ const AcademicDepartment = () => {
             dataIndex: "academicFaculty",
             key: "name",
         },
+        {
+            title: "Action",
+            key: "action",
+            render: () => (
+                <span>
+                    <Button>Update</Button>
+                </span>
+            ),
+        },
     ];
 
     const tableData: DataType[] = data?.data?.map(
@@ -43,7 +57,17 @@ const AcademicDepartment = () => {
     return (
         <Row justify="center" style={{ marginTop: 20 }}>
             <Col span={12}>
-                <Table columns={columns} dataSource={tableData} />;
+                <Table
+                    columns={columns}
+                    dataSource={tableData}
+                    pagination={false}
+                />
+                <Pagination
+                    total={metaData?.total}
+                    pageSize={metaData?.limit}
+                    current={page}
+                    onChange={(value) => setPage(value)}
+                />
             </Col>
         </Row>
     );

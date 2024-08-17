@@ -1,3 +1,4 @@
+import { TQueryParams } from "../../../types/global.types";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
@@ -13,10 +14,18 @@ const userManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['userManagement']
         }),
         getAllStudent: builder.query({
-            query: () => {
+            query: (args) => {
+                const params = new URLSearchParams();
+
+                if (args) {
+                    args.forEach((item: TQueryParams) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
                 return {
                     url: '/students',
                     method: 'GET',
+                    params: params,
                 }
             },
             providesTags: ['userManagement']
@@ -36,7 +45,7 @@ const userManagementApi = baseApi.injectEndpoints({
                 return {
                     url: `/students/${id}`,
                     method: 'PATCH',
-                    body: {student: studentInfo.student},
+                    body: { student: studentInfo.student },
                 }
             }
         }),
@@ -60,10 +69,18 @@ const userManagementApi = baseApi.injectEndpoints({
             }
         }),
         getAllFaculty: builder.query({
-            query: () => {
+            query: (args) => {
+                const params = new URLSearchParams();
+
+                if (args) {
+                    args.forEach((item: TQueryParams) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
                 return {
                     url: '/faculties',
-                    method: 'GET'
+                    method: 'GET',
+                    params: params,
                 }
             },
             providesTags: ['userManagement']
@@ -88,10 +105,18 @@ const userManagementApi = baseApi.injectEndpoints({
             invalidatesTags: ['userManagement']
         }),
         getAllAdmin: builder.query({
-            query: () => {
+            query: (args) => {
+                const params = new URLSearchParams();
+
+                if (args) {
+                    args.forEach((item: TQueryParams) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
                 return {
                     url: '/admins',
                     method: 'GET',
+                    params: params,
                 }
             },
             providesTags: ['userManagement']

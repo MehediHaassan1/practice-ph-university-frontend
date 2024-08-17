@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { academicFacultySchema } from "../../../schema/academicManagement.schema";
 
 const CreateAcademicFaculty = () => {
-    const [createFaculty] = academicManagementApi.useCreateFacultyMutation();
+    const [createFaculty] = academicManagementApi.useCreateAcademicFacultyMutation();
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Faculty is creating...");
         const res = await createFaculty(data);

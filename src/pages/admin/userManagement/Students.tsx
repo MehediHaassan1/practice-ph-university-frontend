@@ -1,7 +1,8 @@
-import { Button, Table, TableColumnsType, TableProps } from "antd";
+import { Button, Pagination, Table, TableColumnsType, TableProps } from "antd";
 import userManagementApi from "../../../redux/features/admin/userManagement.api";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useState } from "react";
 
 // export type TTableData = Pick<
 //     TAcademicSemester,
@@ -9,8 +10,15 @@ import { toast } from "sonner";
 // >;
 
 const Students = () => {
+    const [page, setPage] = useState(1);
     const { data: studentData, isLoading: studentLoading } =
-        userManagementApi.useGetAllStudentQuery(undefined);
+        userManagementApi.useGetAllStudentQuery([
+            { name: "limit", value: 3 },
+            { name: "page", value: page },
+            { name: "sort", value: "id" },
+        ]);
+
+    const metaData = studentData?.meta;
 
     const [blockUser] = userManagementApi.useBlockUserMutation();
 
@@ -134,11 +142,20 @@ const Students = () => {
     ];
 
     return (
-        <Table
-            columns={columns}
-            dataSource={tableData}
-            showSorterTooltip={{ target: "sorter-icon" }}
-        />
+        <>
+            <Table
+                columns={columns}
+                dataSource={tableData}
+                showSorterTooltip={{ target: "sorter-icon" }}
+                pagination={false}
+            />
+            <Pagination
+                total={metaData?.total}
+                pageSize={metaData?.limit}
+                current={page}
+                onChange={(value) => setPage(value)}
+            />
+        </>
     );
 };
 

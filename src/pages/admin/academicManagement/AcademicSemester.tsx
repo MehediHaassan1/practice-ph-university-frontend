@@ -1,4 +1,4 @@
-import { Table, TableColumnsType, TableProps } from "antd";
+import { Button, Table, TableColumnsType, TableProps } from "antd";
 import academicManagementApi from "../../../redux/features/admin/academicManagement.api";
 import { TAcademicSemester, TQueryParams } from "../../../types/global.types";
 import { useState } from "react";
@@ -81,6 +81,15 @@ const AcademicSemester = () => {
             title: "End Month",
             dataIndex: "endMonth",
         },
+        {
+            title: "Action",
+            key: "action",
+            render: () => (
+                <span>
+                    <Button>Update</Button>
+                </span>
+            ),
+        }
     ];
 
     const onChange: TableProps<TTableData>["onChange"] = (

@@ -1,43 +1,42 @@
-import { TAcademicSemester, TQueryParams, TResponseRedux } from "../../../types/global.types";
+// import { TAcademicSemester, TQueryParams, TResponseRedux } from "../../../types/global.types";
 import { baseApi } from "../../api/baseApi"
 
-const academicManagementApi = baseApi.injectEndpoints(
+const courseManagementApi = baseApi.injectEndpoints(
     {
         endpoints: (builder) => ({
-            getAllAcademicSemester: builder.query({
-                query: (args) => {
-                    const params = new URLSearchParams();
-                    if (args) {
-                        args.forEach((item: TQueryParams) => {
-                            params.append(item.name, item.value as string)
-                        })
-                    }
-                    return {
-                        url: '/academic-semesters',
-                        method: 'GET',
-                        params: params,
-                    }
-                },
-                transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
-                    const data = {
-                        data: response.data,
-                        meta: response.meta,
-                    }
-                    return data;
-                },
-                providesTags: ['academicManagement']
-            }),
-            createAcademicSemester: builder.mutation({
+            /*  getAllAcademicSemester: builder.query({
+                 query: (args) => {
+                     const params = new URLSearchParams();
+                     if (args) {
+                         args.forEach((item: TQueryParams) => {
+                             params.append(item.name, item.value as string)
+                         })
+                     }
+                     return {
+                         url: '/academic-semesters',
+                         method: 'GET',
+                         params: params,
+                     }
+                 },
+                 transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
+                     const data = {
+                         data: response.data,
+                         meta: response.meta,
+                     }
+                     return data;
+                 },
+                 providesTags: ['academicManagement']
+             }), */
+            createSemesterRegistration: builder.mutation({
                 query: (data) => {
                     return {
-                        url: '/academic-semesters/create-academic-semester',
+                        url: '/semester-registrations/create-semester-registration',
                         method: 'POST',
                         body: data,
                     }
-                },
-                invalidatesTags: ['academicManagement']
+                }
             }),
-            createAcademicFaculty: builder.mutation({
+            /* createAcademicFaculty: builder.mutation({
                 query: (data) => {
                     return {
                         url: '/academic-faculties/create-academic-faculty',
@@ -88,9 +87,9 @@ const academicManagementApi = baseApi.injectEndpoints(
                     }
                 },
                 providesTags: ['academicManagement']
-            }),
+            }), */
         }),
     }
 )
 
-export default academicManagementApi;
+export default courseManagementApi;

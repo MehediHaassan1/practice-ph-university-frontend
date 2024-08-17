@@ -15,6 +15,11 @@ import FacultyDetails from "../pages/admin/userManagement/FacultyDetails";
 import Admin from "../pages/admin/userManagement/Admin";
 import AdminDetails from "../pages/admin/userManagement/AdminDetails";
 import StudentUpdate from "../pages/admin/userManagement/StudentUpdate";
+import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
+import RegisteredSemesters from "../pages/admin/courseManagement/RegisteredSemesters";
+import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
+import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
+import OfferedCourse from "../pages/admin/courseManagement/OfferedCourse";
 
 const adminItems = [
     {
@@ -105,6 +110,36 @@ const adminItems = [
             {
                 path: "admin/details/:id",
                 element: <AdminDetails />,
+            },
+        ],
+    },
+    {
+        name: "Course Management",
+        children: [
+            {
+                name: "Semester Registration",
+                path: "semester-registration",
+                element: <SemesterRegistration />,
+            },
+            {
+                name: "Registered Semester",
+                path: "registered-semester",
+                element: <RegisteredSemesters />,
+            },
+            {
+                name: "Create Course",
+                path: "create-course",
+                element: <CreateCourse />,
+            },
+            {
+                name: "Offer Course",
+                path: "offer-course",
+                element: <OfferCourse />,
+            },
+            {
+                name: "Offered Course",
+                path: "offered-course",
+                element: <OfferedCourse />,
             },
         ],
     },

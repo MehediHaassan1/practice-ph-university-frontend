@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 const CreateAcademicDepartment = () => {
     const { data: academicFaculty, isLoading } =
-        academicManagementApi.useGetAllFacultyQuery(undefined);
+        academicManagementApi.useGetAllAcademicFacultyQuery(undefined);
 
     const [createDepartment] =
         academicManagementApi.useCreateDepartmentMutation();

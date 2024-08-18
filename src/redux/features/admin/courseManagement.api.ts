@@ -76,32 +76,32 @@ const courseManagementApi = baseApi.injectEndpoints(
                 },
                 providesTags: ['coursesManagement']
             }),
-            /*createDepartment: builder.mutation({
-               query: (data) => {
-                   return {
-                       url: '/academic-departments/create-academic-department',
-                       method: 'POST',
-                       body: data,
-                   }
-               },
-               invalidatesTags: ['academicManagement']
-           }),
-           getAllDepartment: builder.query({
-               query: (args) => {
-                   const params = new URLSearchParams();
-                   if (args) {
-                       args.forEach((item: TQueryParams) => {
-                           params.append(item.name, item.value as string)
-                       })
-                   }
-                   return {
-                       url: '/academic-departments',
-                       method: 'GET',
-                       params: params,
-                   }
-               },
-               providesTags: ['academicManagement']
-           }), */
+            assignFaculties: builder.mutation({
+                query: (args) => {
+                    return {
+                        url: `/courses/${args.courseId}/assign-faculties`,
+                        method: 'PUT',
+                        body: args.data,
+                    }
+                },
+                invalidatesTags: ['coursesManagement']
+            }),
+            /*getAllDepartment: builder.query({
+                query: (args) => {
+                    const params = new URLSearchParams();
+                    if (args) {
+                        args.forEach((item: TQueryParams) => {
+                            params.append(item.name, item.value as string)
+                        })
+                    }
+                    return {
+                        url: '/academic-departments',
+                        method: 'GET',
+                        params: params,
+                    }
+                },
+                providesTags: ['academicManagement']
+            }), */
         }),
     }
 )

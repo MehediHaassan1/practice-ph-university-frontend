@@ -20,6 +20,7 @@ import RegisteredSemesters from "../pages/admin/courseManagement/RegisteredSemes
 import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
 import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
 import OfferedCourse from "../pages/admin/courseManagement/OfferedCourse";
+import Course from "../pages/admin/courseManagement/Course";
 
 const adminItems = [
     {
@@ -130,6 +131,11 @@ const adminItems = [
                 name: "Create Course",
                 path: "create-course",
                 element: <CreateCourse />,
+            },
+            {
+                name: "Courses",
+                path: "courses",
+                element: <Course />,
             },
             {
                 name: "Offer Course",

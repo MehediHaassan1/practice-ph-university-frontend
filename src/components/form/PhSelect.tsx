@@ -8,9 +8,17 @@ type PhSelectProps = {
     options: Array<{ value: string; label: string }>;
     label?: string;
     disabled?: boolean;
+    mode?: "multiple" | undefined;
 };
 
-const PhSelect = ({ control, name, options, label, disabled }: PhSelectProps) => (
+const PhSelect = ({
+    control,
+    name,
+    options,
+    label,
+    disabled,
+    mode
+}: PhSelectProps) => (
     <Controller
         name={name}
         control={control}
@@ -23,6 +31,7 @@ const PhSelect = ({ control, name, options, label, disabled }: PhSelectProps) =>
                     ref={ref}
                     name={name}
                     disabled={disabled}
+                    mode={mode}
                 >
                     {options.map((option) => (
                         <Select.Option key={option.value} value={option.value}>

@@ -50,17 +50,17 @@ const courseManagementApi = baseApi.injectEndpoints(
                 },
                 invalidatesTags: ['coursesManagement']
             }),
-            /* createAcademicFaculty: builder.mutation({
+            createCourse: builder.mutation({
                 query: (data) => {
                     return {
-                        url: '/academic-faculties/create-academic-faculty',
+                        url: '/courses/create-course',
                         method: 'POST',
                         body: data,
                     }
                 },
-                invalidatesTags: ['academicManagement']
+                invalidatesTags: ['coursesManagement']
             }),
-            getAllAcademicFaculty: builder.query({
+            getAllCourses: builder.query({
                 query: (args) => {
                     const params = new URLSearchParams();
                     if (args) {
@@ -69,39 +69,39 @@ const courseManagementApi = baseApi.injectEndpoints(
                         })
                     }
                     return {
-                        url: '/academic-faculties',
+                        url: '/courses',
                         method: 'GET',
                         params: params,
                     }
                 },
-                providesTags: ['academicManagement']
+                providesTags: ['coursesManagement']
             }),
-            createDepartment: builder.mutation({
-                query: (data) => {
-                    return {
-                        url: '/academic-departments/create-academic-department',
-                        method: 'POST',
-                        body: data,
-                    }
-                },
-                invalidatesTags: ['academicManagement']
-            }),
-            getAllDepartment: builder.query({
-                query: (args) => {
-                    const params = new URLSearchParams();
-                    if (args) {
-                        args.forEach((item: TQueryParams) => {
-                            params.append(item.name, item.value as string)
-                        })
-                    }
-                    return {
-                        url: '/academic-departments',
-                        method: 'GET',
-                        params: params,
-                    }
-                },
-                providesTags: ['academicManagement']
-            }), */
+            /*createDepartment: builder.mutation({
+               query: (data) => {
+                   return {
+                       url: '/academic-departments/create-academic-department',
+                       method: 'POST',
+                       body: data,
+                   }
+               },
+               invalidatesTags: ['academicManagement']
+           }),
+           getAllDepartment: builder.query({
+               query: (args) => {
+                   const params = new URLSearchParams();
+                   if (args) {
+                       args.forEach((item: TQueryParams) => {
+                           params.append(item.name, item.value as string)
+                       })
+                   }
+                   return {
+                       url: '/academic-departments',
+                       method: 'GET',
+                       params: params,
+                   }
+               },
+               providesTags: ['academicManagement']
+           }), */
         }),
     }
 )

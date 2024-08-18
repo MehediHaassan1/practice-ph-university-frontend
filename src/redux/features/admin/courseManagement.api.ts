@@ -1,32 +1,12 @@
 // import { TAcademicSemester, TQueryParams, TResponseRedux } from "../../../types/global.types";
+import { TRegisteredSemester } from "../../../types/courseManagement.types";
+import { TQueryParams, TResponseRedux } from "../../../types/global.types";
 import { baseApi } from "../../api/baseApi"
 
 const courseManagementApi = baseApi.injectEndpoints(
     {
         endpoints: (builder) => ({
-            /*  getAllAcademicSemester: builder.query({
-                 query: (args) => {
-                     const params = new URLSearchParams();
-                     if (args) {
-                         args.forEach((item: TQueryParams) => {
-                             params.append(item.name, item.value as string)
-                         })
-                     }
-                     return {
-                         url: '/academic-semesters',
-                         method: 'GET',
-                         params: params,
-                     }
-                 },
-                 transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
-                     const data = {
-                         data: response.data,
-                         meta: response.meta,
-                     }
-                     return data;
-                 },
-                 providesTags: ['academicManagement']
-             }), */
+
             createSemesterRegistration: builder.mutation({
                 query: (data) => {
                     return {
@@ -34,7 +14,41 @@ const courseManagementApi = baseApi.injectEndpoints(
                         method: 'POST',
                         body: data,
                     }
-                }
+                },
+                invalidatesTags: ['coursesManagement']
+            }),
+            getAllRegisteredSemesters: builder.query({
+                query: (args) => {
+                    const params = new URLSearchParams();
+                    if (args) {
+                        args.forEach((item: TQueryParams) => {
+                            params.append(item.name, item.value as string)
+                        })
+                    }
+                    return {
+                        url: '/semester-registrations',
+                        method: 'GET',
+                        params: params,
+                    }
+                },
+                transformResponse: (response: TResponseRedux<TRegisteredSemester[]>) => {
+                    const data = {
+                        data: response.data,
+                        meta: response.meta,
+                    }
+                    return data;
+                },
+                providesTags: ['coursesManagement']
+            }),
+            updateRegSemesterStatus: builder.mutation({
+                query: (args) => {
+                    return {
+                        url: `/semester-registrations/${args.id}`,
+                        method: 'PATCH',
+                        body: args.data,
+                    }
+                },
+                invalidatesTags: ['coursesManagement']
             }),
             /* createAcademicFaculty: builder.mutation({
                 query: (data) => {

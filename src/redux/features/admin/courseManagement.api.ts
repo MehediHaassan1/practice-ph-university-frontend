@@ -86,22 +86,25 @@ const courseManagementApi = baseApi.injectEndpoints(
                 },
                 invalidatesTags: ['coursesManagement']
             }),
-            /*getAllDepartment: builder.query({
+            getAllAssignedFaculties: builder.query({
                 query: (args) => {
-                    const params = new URLSearchParams();
-                    if (args) {
-                        args.forEach((item: TQueryParams) => {
-                            params.append(item.name, item.value as string)
-                        })
-                    }
                     return {
-                        url: '/academic-departments',
+                        url: `/courses/${args.courseId}/get-faculties`,
                         method: 'GET',
-                        params: params,
                     }
                 },
-                providesTags: ['academicManagement']
-            }), */
+                providesTags: ['coursesManagement']
+            }),
+            offerCourse: builder.mutation({
+                query: (args) => {
+                    return {
+                        url: `/offered-courses/create-offered-course`,
+                        method: 'POST',
+                        body: args.data,
+                    }
+                },
+                invalidatesTags: ['coursesManagement']
+            }),
         }),
     }
 )

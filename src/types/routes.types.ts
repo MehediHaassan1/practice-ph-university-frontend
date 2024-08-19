@@ -6,7 +6,7 @@ export type TRoute = {
 }
 
 export type TItem = {
-    name: string;
+    name?: string;
     path?: string;
     element?: ReactNode;
     children?: TItem[];

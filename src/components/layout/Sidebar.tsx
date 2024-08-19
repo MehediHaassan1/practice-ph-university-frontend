@@ -5,6 +5,8 @@ import adminItems from "../../routes/admin.routes";
 import facultyItems from "../../routes/faculty.routes";
 import studentItems from "../../routes/student.routes";
 import { useAppSelector } from "../../redux/hook";
+import { jwtDecode } from "jwt-decode";
+import { TAuthUser } from "../../redux/features/auth/authSlice";
 
 const userRole = {
     ADMIN: "admin",
@@ -13,7 +15,12 @@ const userRole = {
 };
 
 const Sidebar = () => {
-    const { user } = useAppSelector((state) => state.auth);
+    const { token } = useAppSelector((state) => state.auth);
+    let user;
+    if (token) {
+        user = jwtDecode(token) as TAuthUser;
+    }
+
     let sidebarItems;
 
     switch (user!.role) {
@@ -30,12 +37,17 @@ const Sidebar = () => {
         default:
             break;
     }
-
     return (
         <Sider
             breakpoint="lg"
             collapsedWidth="0"
-            style={{ height: "100vh", position: "sticky", top: "0", left: "0", overflowY: 'auto' }}
+            style={{
+                height: "100vh",
+                position: "sticky",
+                top: "0",
+                left: "0",
+                overflowY: "auto",
+            }}
         >
             <div
                 style={{

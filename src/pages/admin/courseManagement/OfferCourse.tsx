@@ -132,7 +132,7 @@ const OfferCourse = () => {
                                 disabled={!id || facultyFetching}
                                 name="faculty"
                                 label="Faculty"
-                                options={facultyOptions}
+                                options={facultyOptions ? facultyOptions : []}
                             />
                         </Col>
                         <Col xs={24} sm={12}>

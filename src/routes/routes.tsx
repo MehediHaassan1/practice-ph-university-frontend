@@ -7,6 +7,7 @@ import adminItems from "./admin.routes";
 import facultyItems from "./faculty.routes";
 import studentItems from "./student.routes";
 import Login from "../pages/Login";
+import ProtectedRoute from "../components/layout/ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -26,21 +27,33 @@ const router = createBrowserRouter([
     //* admin routes
     {
         path: "/admin",
-        element: <App />,
+        element: (
+            <ProtectedRoute role="admin">
+                <App />
+            </ProtectedRoute>
+        ),
         children: generateRoutes(adminItems),
     },
 
     //* faculty routes
     {
         path: "/faculty",
-        element: <App />,
+        element: (
+            <ProtectedRoute role="faculty">
+                <App />
+            </ProtectedRoute>
+        ),
         children: generateRoutes(facultyItems),
     },
 
     //* student routes
     {
         path: "/student",
-        element: <App />,
+        element: (
+            <ProtectedRoute role="student">
+                <App />
+            </ProtectedRoute>
+        ),
         children: generateRoutes(studentItems),
     },
 

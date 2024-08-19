@@ -16,14 +16,17 @@ const Login = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data: FieldValues) => {
-        console.log(data);
         const toastId = toast.loading("Logging in!");
         try {
             const res = await login(data).unwrap();
             const decoded = jwtDecode(res.data.accessToken) as TAuthUser;
             dispatch(setUser({ user: decoded, token: res.data.accessToken }));
+            if (res?.data?.needsPasswordChange) {
+                navigate("/change-password");
+            } else {
+                navigate(`/${decoded.role}/dashboard`);
+            }
             toast.success("Logged in!", { id: toastId, duration: 2000 });
-            navigate(`/${decoded.role}/dashboard`);
         } catch (error: any) {
             toast.error(error.message, { id: toastId, duration: 2000 });
         }
